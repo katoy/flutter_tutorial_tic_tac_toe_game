@@ -1,10 +1,9 @@
-//Step3.親から子にメソッドを渡そう
 // import 'dart:collection';
-
 import 'package:flutter/material.dart';
 
-const textSize = 58.0;
-const squareSize = 64.0;
+const textSize = 44.0;
+const squareSize = 46.0;
+const fontSize = 22.0;
 
 void main() {
   runApp(const Game());
@@ -30,7 +29,6 @@ class Square extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             color: const Color.fromRGBO(9, 9, 9, 1),
-            width: 1,
           ),
         ),
         child: Center(
@@ -73,6 +71,18 @@ class _BoardState extends State<Board> {
     });
   }
 
+  void handleReset() {
+    final squares = _squares.sublist(0);
+    for (var i = 0; i < squares.length; i++) {
+      squares[i] = null;
+    }
+
+    setState(() {
+      _squares = squares;
+      _xIsNext = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final winner = calculateWinner(_squares);
@@ -87,7 +97,16 @@ class _BoardState extends State<Board> {
 
     return Column(
       children: [
-        Text(status),
+        Padding(
+          padding: const EdgeInsets.all(6), // マージン
+          child: Text(
+            status,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize,
+            ),
+          ),
+        ),
         SizedBox(
           height: squareSize * 3,
           width: squareSize * 3,
@@ -102,6 +121,26 @@ class _BoardState extends State<Board> {
               ),
             ),
           ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(6), // マージン
+          child:
+            TextButton(
+              onPressed: handleReset,
+              style: TextButton.styleFrom(
+                side: const BorderSide(
+                  width: 2,
+                  color: Colors.black54, //枠線の色
+                ),
+                textStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: fontSize,
+                ),
+                foregroundColor: Colors.black, // foreground
+                alignment: Alignment.topCenter,
+              ),
+              child: const Text('Restart'),
+            ),
         ),
       ],
     );
@@ -122,15 +161,15 @@ class Game extends StatelessWidget {
         ),
         backgroundColor: const Color.fromARGB(255, 158, 162, 163),
         body: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(10),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Board(),
+            children: [
+              const Board(),
               Padding(
-                padding: EdgeInsets.only(left: 20),
-                // child: Column(children: const []),
+                padding: const EdgeInsets.only(left: 10),
+                child: Column(),
               ),
             ],
           ),
@@ -150,7 +189,7 @@ String? calculateWinner(List<String?> squares) {
     [0, 4, 8], [2, 4, 6],
   ];
 
-  for (final positions  in lines) {
+  for (final positions in lines) {
     final cells = {
       squares[positions[0]],
       squares[positions[1]],
