@@ -3,8 +3,8 @@
 
 import 'package:flutter/material.dart';
 
-const textSize = 24.0;
-const squareSize = 34.0;
+const textSize = 58.0;
+const squareSize = 64.0;
 
 void main() {
   runApp(const Game());
@@ -89,8 +89,8 @@ class _BoardState extends State<Board> {
       children: [
         Text(status),
         SizedBox(
-          height: 34 * 3,
-          width: 34 * 3,
+          height: squareSize * 3,
+          width: squareSize * 3,
           child: GridView.count(
             shrinkWrap: true,
             crossAxisCount: 3,
@@ -125,7 +125,7 @@ class Game extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               Board(),
               Padding(
