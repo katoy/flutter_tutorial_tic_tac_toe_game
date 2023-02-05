@@ -1,10 +1,10 @@
 //Step3.親から子にメソッドを渡そう
-import 'dart:collection';
+// import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
-const TEXT_SIZE = 24.0;
-const SQUARE_SIZE = 34.0;
+const textSize = 24.0;
+const squareSize = 34.0;
 
 void main() {
   runApp(const Game());
@@ -25,8 +25,8 @@ class Square extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: SQUARE_SIZE,
-        width: SQUARE_SIZE,
+        height: squareSize,
+        width: squareSize,
         decoration: BoxDecoration(
           border: Border.all(
             color: const Color.fromRGBO(9, 9, 9, 1),
@@ -37,7 +37,7 @@ class Square extends StatelessWidget {
           child: Text(
             value ?? '',
             style: const TextStyle(
-              fontSize: TEXT_SIZE,
+              fontSize: textSize,
               fontWeight: FontWeight.bold,
             ),
           ),
